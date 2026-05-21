@@ -3,20 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>物販計算</title>
 
 <style>
+
 body{
     font-family:sans-serif;
-    padding:20px;
     background:#f5f5f5;
+    padding:20px;
 }
 
 .item{
     background:white;
+    border-radius:10px;
     padding:15px;
     margin-bottom:10px;
-    border-radius:10px;
 }
 
 .controls{
@@ -34,11 +36,12 @@ button{
 
 .total{
     background:white;
-    padding:20px;
     border-radius:10px;
+    padding:20px;
     margin-top:20px;
     font-size:20px;
 }
+
 </style>
 </head>
 
@@ -70,24 +73,33 @@ async function loadGoods(){
     render();
 }
 
-loadGoods();
-const itemsDiv = document.getElementById("items");
-
 function render(){
+
+    const itemsDiv = document.getElementById("items");
+
     itemsDiv.innerHTML = "";
 
     goods.forEach((item,index)=>{
 
         const div = document.createElement("div");
+
         div.className = "item";
 
         div.innerHTML = `
-            <h3>${item.name}</h3>
+            <h3>
+                ${item.category ? item.category + " " : ""}
+                ${item.name}
+            </h3>
+
             <p>${item.price}円</p>
+
+            ${item.limit ? `<p>制限 ${item.limit}個</p>` : ""}
 
             <div class="controls">
                 <button onclick="changeQty(${index},-1)">-</button>
+
                 <span>${item.qty}</span>
+
                 <button onclick="changeQty(${index},1)">+</button>
             </div>
         `;
@@ -100,10 +112,19 @@ function render(){
 
 function changeQty(index,amount){
 
-    goods[index].qty += amount;
+    const item = goods[index];
 
-    if(goods[index].qty < 0){
-        goods[index].qty = 0;
+    item.qty += amount;
+
+    if(item.qty < 0){
+        item.qty = 0;
+    }
+
+    if(item.limit && item.qty > item.limit){
+
+        item.qty = item.limit;
+
+        alert(`${item.name} は ${item.limit} 個までです`);
     }
 
     render();
@@ -120,9 +141,11 @@ function calculate(){
     const bonus = Math.floor(total / 3000);
 
     document.getElementById("total").textContent = total;
+
     document.getElementById("bonus").textContent = bonus;
 }
 
+loadGoods();
 
 </script>
 
