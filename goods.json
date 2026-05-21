@@ -29,25 +29,35 @@
   },
   {
     "name": "ペンライト",
-    "price": 3500
+    "price": 4500,
+    "limit":5
   },
   {
-    "category": "タオル",
-    "name": "赤タオル",
-    "price": 2500
+    "category": "マフラータオル",
+    "name": "3SKM",
+    "price": 3200,
+    "limit":5
+  },
+   {
+    "category": "マフラータオル",
+    "name": "北見",
+    "price": 3200,
+    "limit":5
+  },
+    {
+    "category": "マフラータオル",
+    "name": "魁星",
+    "price": 3200,
+    "limit":5
+  },
+    {
+    "category": "マフラータオル",
+    "name": "ネス",
+    "price": 3200,
+    "limit":5
   },
   {
-    "category": "タオル",
-    "name": "青タオル",
-    "price": 2500
-  },
-  {
-    "category": "タオル",
-    "name": "黒タオル",
-    "price": 2500
-  }
-  {
-    "name": "アクスタ",
-    "price": 1800
+    "name": "クリアトートバッグ",
+    "price": 4800
   }
 ]
