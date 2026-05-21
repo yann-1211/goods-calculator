@@ -14,6 +14,18 @@ body{
     padding:20px;
 }
 
+h1{
+    margin-bottom:20px;
+}
+
+h2{
+    background:#333;
+    color:white;
+    padding:10px;
+    border-radius:10px;
+    margin-top:30px;
+}
+
 .item{
     background:white;
     border-radius:10px;
@@ -32,6 +44,7 @@ button{
     width:40px;
     height:40px;
     font-size:20px;
+    cursor:pointer;
 }
 
 .total{
@@ -40,6 +53,13 @@ button{
     padding:20px;
     margin-top:20px;
     font-size:20px;
+}
+
+.total button{
+    width:100%;
+    height:50px;
+    margin-top:15px;
+    font-size:18px;
 }
 
 </style>
@@ -52,6 +72,7 @@ button{
 <div id="items"></div>
 
 <div class="total">
+
     <p>合計：<span id="total">0</span> 円</p>
 
     <p>
@@ -60,43 +81,63 @@ button{
     </p>
 
     <p id="nextBonus"></p>
+
     <button onclick="resetCart()">
-全クリア
-</button>
+        全クリア
+    </button>
+
 </div>
 
 <script>
 
 let goods = [];
 
+// 保存
+function saveData(){
+
+    localStorage.setItem(
+        "goodsData",
+        JSON.stringify(goods)
+    );
+}
+
+// 商品読み込み
 async function loadGoods(){
 
     const response = await fetch("goods.json");
 
     goods = await response.json();
 
-const saved = localStorage.getItem("goodsData");
+    // 保存データ読み込み
+    const saved = localStorage.getItem("goodsData");
 
-if(saved){
+    if(saved){
 
-    const savedGoods = JSON.parse(saved);
+        const savedGoods = JSON.parse(saved);
 
-    goods.forEach((item,index)=>{
+        goods.forEach((item,index)=>{
 
-        item.qty = savedGoods[index]?.qty || 0;
-    });
+            item.qty = savedGoods[index]?.qty || 0;
+        });
 
-}else{
+    }else{
 
-    goods.forEach(item=>{
-        item.qty = 0;
-    });
-}
+        goods.forEach(item=>{
+            item.qty = 0;
+        });
+    }
 
     render();
 }
-    
+
+// 全クリア
 function resetCart(){
+
+    const ok = confirm("全てクリアしますか？");
+
+    if(!ok){
+        return;
+    }
 
     goods.forEach(item=>{
         item.qty = 0;
@@ -106,7 +147,8 @@ function resetCart(){
 
     render();
 }
-    
+
+// 表示
 function render(){
 
     const itemsDiv = document.getElementById("items");
@@ -126,8 +168,6 @@ function render(){
 
             categoryDiv.textContent = currentCategory;
 
-            categoryDiv.style.marginTop = "30px";
-
             itemsDiv.appendChild(categoryDiv);
         }
 
@@ -143,11 +183,17 @@ function render(){
             ${item.limit ? `<p>制限 ${item.limit}個</p>` : ""}
 
             <div class="controls">
-                <button onclick="changeQty(${index},-1)">-</button>
+
+                <button onclick="changeQty(${index},-1)">
+                    -
+                </button>
 
                 <span>${item.qty}</span>
 
-                <button onclick="changeQty(${index},1)">+</button>
+                <button onclick="changeQty(${index},1)">
+                    +
+                </button>
+
             </div>
         `;
 
@@ -157,37 +203,45 @@ function render(){
     calculate();
 }
 
+// 数量変更
 function changeQty(index,amount){
 
     const item = goods[index];
 
     item.qty += amount;
 
+    // 0未満防止
     if(item.qty < 0){
         item.qty = 0;
     }
 
+    // 購入制限
     if(item.limit && item.qty > item.limit){
 
         item.qty = item.limit;
 
         alert(`${item.name} は ${item.limit} 個までです`);
     }
- saveData();
+
+    saveData();
+
     render();
 }
 
+// 計算
 function calculate(){
 
     let total = 0;
 
     goods.forEach(item=>{
+
         total += item.price * item.qty;
     });
 
+    // 特典計算
     let bonus = Math.floor(total / 3000);
 
-    // 特典上限20
+    // 最大20枚
     if(bonus > 20){
         bonus = 20;
     }
@@ -206,7 +260,6 @@ function calculate(){
 
         const remain = 3000 - (total % 3000);
 
-        // ちょうど3000円の場合
         const next = remain === 3000 ? 0 : remain;
 
         if(next === 0){
@@ -221,6 +274,8 @@ function calculate(){
         }
     }
 }
+
+// 初期化
 loadGoods();
 
 </script>
