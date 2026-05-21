@@ -53,7 +53,10 @@ button{
 
 <div class="total">
     <p>合計：<span id="total">0</span> 円</p>
-    <p>特典：<span id="bonus">0</span> 枚</p>
+    <p>
+特典：<span id="bonus">0</span> 枚
+（全6種ランダム・最大20枚）
+</p>
 </div>
 
 <script>
@@ -138,7 +141,20 @@ function calculate(){
         total += item.price * item.qty;
     });
 
-    const bonus = Math.floor(total / 3000);
+function calculate(){
+
+    let total = 0;
+
+    goods.forEach(item=>{
+        total += item.price * item.qty;
+    });
+
+    let bonus = Math.floor(total / 3000);
+
+    // 特典上限20
+    if(bonus > 20){
+        bonus = 20;
+    }
 
     document.getElementById("total").textContent = total;
 
