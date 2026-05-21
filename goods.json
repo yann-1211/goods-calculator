@@ -1,12 +1,32 @@
 [
   {
     "name": "ランダムカード〈全14種〉",
-    "price": 400
-  }
+    "price": 400,
+     "limit": 40
+  },
  {
     "name": "ランダム缶バッジ〈全9種〉",
-    "price": 600
-  }
+    "price": 600,
+  "limit": 40
+  },
+ {
+    "category": "アクリルスタンド",
+    "name": "北見",
+    "price": 1800,
+    "limit": 5
+  },
+   {
+    "category": "アクリルスタンド",
+    "name": "魁星",
+    "price": 1800,
+    "limit": 5
+  },
+   {
+    "category": "アクリルスタンド",
+    "name": "ネス",
+    "price": 1800,
+    "limit": 5
+  },
   {
     "name": "ペンライト",
     "price": 3500
