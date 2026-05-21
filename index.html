@@ -60,6 +60,9 @@ button{
     </p>
 
     <p id="nextBonus"></p>
+    <button onclick="resetCart()">
+全クリア
+</button>
 </div>
 
 <script>
@@ -92,7 +95,18 @@ if(saved){
 
     render();
 }
+    
+function resetCart(){
 
+    goods.forEach(item=>{
+        item.qty = 0;
+    });
+
+    saveData();
+
+    render();
+}
+    
 function render(){
 
     const itemsDiv = document.getElementById("items");
