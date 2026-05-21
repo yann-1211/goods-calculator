@@ -53,10 +53,13 @@ button{
 
 <div class="total">
     <p>合計：<span id="total">0</span> 円</p>
+
     <p>
-特典：<span id="bonus">0</span> 枚
-（全6種ランダム・最大20枚）
-</p>
+        特典：<span id="bonus">0</span> 枚
+        （全6種ランダム・最大20枚）
+    </p>
+
+    <p id="nextBonus"></p>
 </div>
 
 <script>
@@ -141,14 +144,6 @@ function calculate(){
         total += item.price * item.qty;
     });
 
-function calculate(){
-
-    let total = 0;
-
-    goods.forEach(item=>{
-        total += item.price * item.qty;
-    });
-
     let bonus = Math.floor(total / 3000);
 
     // 特典上限20
@@ -159,8 +154,32 @@ function calculate(){
     document.getElementById("total").textContent = total;
 
     document.getElementById("bonus").textContent = bonus;
-}
 
+    // 次の特典まで
+    if(bonus >= 20){
+
+        document.getElementById("nextBonus").textContent =
+            "特典上限に達しています";
+
+    }else{
+
+        const remain = 3000 - (total % 3000);
+
+        // ちょうど3000円の場合
+        const next = remain === 3000 ? 0 : remain;
+
+        if(next === 0){
+
+            document.getElementById("nextBonus").textContent =
+                "特典獲得ラインです";
+
+        }else{
+
+            document.getElementById("nextBonus").textContent =
+                `あと ${next} 円で特典1枚追加`;
+        }
+    }
+}
 loadGoods();
 
 </script>
