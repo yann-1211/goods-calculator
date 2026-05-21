@@ -72,9 +72,23 @@ async function loadGoods(){
 
     goods = await response.json();
 
+const saved = localStorage.getItem("goodsData");
+
+if(saved){
+
+    const savedGoods = JSON.parse(saved);
+
+    goods.forEach((item,index)=>{
+
+        item.qty = savedGoods[index]?.qty || 0;
+    });
+
+}else{
+
     goods.forEach(item=>{
         item.qty = 0;
     });
+}
 
     render();
 }
@@ -145,7 +159,7 @@ function changeQty(index,amount){
 
         alert(`${item.name} は ${item.limit} 個までです`);
     }
-
+ saveData();
     render();
 }
 
