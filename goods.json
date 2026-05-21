@@ -28,9 +28,45 @@
     "limit": 5
   },
   {
+    "category": "クリアビッグうちわ",
+    "name": "北見",
+    "price": 1400,
+    "limit": 5
+  },
+   {
+    "category": "クリアビッグうちわ",
+    "name": "魁星",
+    "price": 1400,
+    "limit": 5
+  },
+   {
+    "category": "クリアビッグうちわ",
+    "name": "ネス",
+    "price": 1400,
+    "limit": 5
+  },
+  {
     "name": "ペンライト",
     "price": 4500,
     "limit":5
+  },
+  {
+    "category": "ネックライトパスケース",
+    "name": "北見",
+    "price": 2500,
+    "limit": 5
+  },
+   {
+    "category": "ネックライトパスケース",
+    "name": "魁星",
+    "price": 2500,
+    "limit": 5
+  },
+   {
+    "category": "ネックライトパスケース",
+    "name": "ネス",
+    "price": 2500,
+    "limit": 5
   },
   {
     "category": "マフラータオル",
@@ -59,5 +95,62 @@
   {
     "name": "クリアトートバッグ",
     "price": 4800
+  },
+  {
+    "name": "ビッグシルエットTシャツ",
+    "price": 4500,
+  "limit": 5
+  },
+  {
+    "category": "ラバーバンド",
+    "name": "3SKM",
+    "price": 1000,
+    "limit":5
+  },
+   {
+    "category": "ラバーバンド",
+    "name": "北見",
+    "price": 1000,
+    "limit":5
+  },
+    {
+    "category": "ラバーバンド",
+    "name": "魁星",
+    "price": 1000,
+    "limit":5
+  },
+    {
+    "category": "ラバーバンド",
+    "name": "ネス",
+    "price": 1000,
+    "limit":5
+  },
+  {
+    "name": "メッシュキャップ",
+    "price": 5500,
+    "limit":5
+  },
+  {
+    "name": "にじぱぺライブルック",
+    "price": 2800,
+    "limit":5
+  },
+  {
+    "category": "さんくまキーホルダー",
+    "name": "北見",
+    "price": 2000,
+    "limit": 5
+  },
+   {
+    "category": "さんくまキーホルダー",
+    "name": "魁星",
+    "price": 2000,
+    "limit": 5
+  },
+   {
+    "category": "さんくまキーホルダー",
+    "name": "ネス",
+    "price": 2500,
+    "limit": 5
   }
 ]
