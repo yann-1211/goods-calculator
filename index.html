@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物販計算</title>
 
+<style>
+body{
+    font-family:sans-serif;
+    padding:20px;
+    background:#f5f5f5;
+}
+
+.item{
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:10px;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    align-items:center;
+    margin-top:10px;
+}
+
+button{
+    width:40px;
+    height:40px;
+    font-size:20px;
+}
+
+.total{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>物販計算</h1>
+
+<div id="items"></div>
+
+<div class="total">
+    <p>合計：<span id="total">0</span> 円</p>
+    <p>特典：<span id="bonus">0</span> 枚</p>
+</div>
+
+<script>
+
+const goods = [
+    {name:"ペンライト", price:3500, qty:0},
+    {name:"タオル", price:2500, qty:0},
+    {name:"アクスタ", price:1800, qty:0},
+];
+
+const itemsDiv = document.getElementById("items");
+
+function render(){
+    itemsDiv.innerHTML = "";
+
+    goods.forEach((item,index)=>{
+
+        const div = document.createElement("div");
+        div.className = "item";
+
+        div.innerHTML = `
+            <h3>${item.name}</h3>
+            <p>${item.price}円</p>
+
+            <div class="controls">
+                <button onclick="changeQty(${index},-1)">-</button>
+                <span>${item.qty}</span>
+                <button onclick="changeQty(${index},1)">+</button>
+            </div>
+        `;
+
+        itemsDiv.appendChild(div);
+    });
+
+    calculate();
+}
+
+function changeQty(index,amount){
+
+    goods[index].qty += amount;
+
+    if(goods[index].qty < 0){
+        goods[index].qty = 0;
+    }
+
+    render();
+}
+
+function calculate(){
+
+    let total = 0;
+
+    goods.forEach(item=>{
+        total += item.price * item.qty;
+    });
+
+    const bonus = Math.floor(total / 3000);
+
+    document.getElementById("total").textContent = total;
+    document.getElementById("bonus").textContent = bonus;
+}
+
+render();
+
+</script>
+
+</body>
+</html>
