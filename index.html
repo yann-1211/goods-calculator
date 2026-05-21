@@ -55,12 +55,22 @@ button{
 
 <script>
 
-const goods = [
-    {name:"ペンライト", price:3500, qty:0},
-    {name:"タオル", price:2500, qty:0},
-    {name:"アクスタ", price:1800, qty:0},
-];
+let goods = [];
 
+async function loadGoods(){
+
+    const response = await fetch("goods.json");
+
+    goods = await response.json();
+
+    goods.forEach(item=>{
+        item.qty = 0;
+    });
+
+    render();
+}
+
+loadGoods();
 const itemsDiv = document.getElementById("items");
 
 function render(){
@@ -113,7 +123,6 @@ function calculate(){
     document.getElementById("bonus").textContent = bonus;
 }
 
-render();
 
 </script>
 
